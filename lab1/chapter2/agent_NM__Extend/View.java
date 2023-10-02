@@ -2,7 +2,8 @@ package chapter2.agent_NM__Extend;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import chapter2.agent_NM__Extend.Environment.LocationState;
 public class View extends JFrame {
 	private Environment environment;
 	private Map<String, JButton> mapBtns;
-	
+
 	public View(Environment environment) {
 		this.environment = environment;
 		init();
@@ -34,11 +35,15 @@ public class View extends JFrame {
 		JPanel panel = new JPanel();
 
 		setLayout(new CardLayout());
-		panel.setLayout(new GridLayout(Environment.LOCATIONS.length, Environment.LOCATIONS[0].length, 5, 5));
+		panel.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
 		mapBtns = new HashMap<String, JButton>();
-		String path = "C:\\Users\\AD\\work\\java\\AI\\src\\chapter2\\agent_NM__Extend\\";
+		String path = ".\\src\\chapter2\\agent_NM__Extend\\";
 		for (int i = 0; i < Environment.LOCATIONS.length; i++) {
+			gbc.fill = GridBagConstraints.BOTH;
+			gbc.gridy = i;
 			for (int j = 0; j < Environment.LOCATIONS[i].length; j++) {
+				gbc.gridx = j;
 				JButton btn = null;
 				String name = Environment.LOCATIONS[i][j];
 				if (environment.getCurrentState().getAgentLocation().equals(name)) {
@@ -56,7 +61,7 @@ public class View extends JFrame {
 					}
 				}
 				mapBtns.put(name, btn);
-				panel.add(btn);
+				panel.add(btn, gbc);
 			}
 		}
 

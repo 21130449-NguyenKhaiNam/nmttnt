@@ -13,7 +13,7 @@ public class Environment extends Thread {
 	public static final Action MOVE_UP = new DynamicAction("UP");
 	public static final Action MOVE_DOWN = new DynamicAction("DOWN");
 	public static final Action SUCK_DIRT = new DynamicAction("SUCK");
-	public static final String[][] LOCATIONS = { { "A", "B", "C", "D" }, { "E", "F", "G", "H" },
+	public static final String[][] LOCATIONS = { { "A", "C", "D" }, { "E", "F", "G", "H" },
 			{ "I", "J", "K", "L" } };
 
 	public static int score = 0;
@@ -91,7 +91,7 @@ public class Environment extends Thread {
 		if (action == SUCK_DIRT) {
 			score += 500;
 			this.mapBtns.get(this.envState.getAgentLocation()).setIcon(
-					new ImageIcon("C:\\Users\\AD\\work\\java\\AI\\src\\chapter2\\agent_NM__Extend\\nguoi-lao-dong.jpg"));
+					new ImageIcon(".\\src\\chapter2\\agent_NM__Extend\\nguoi-lao-dong.jpg"));
 			this.envState.setLocationState(this.envState.getAgentLocation(), LocationState.CLEAN);
 
 		} else {
@@ -117,9 +117,9 @@ public class Environment extends Thread {
 			} else {
 				score -= 10;
 				this.mapBtns.get(this.envState.getAgentLocation()).setIcon(
-						new ImageIcon("C:\\Users\\AD\\work\\java\\AI\\src\\chapter2\\agent_NM__Extend\\sach-bong.png"));
+						new ImageIcon(".\\src\\chapter2\\agent_NM__Extend\\sach-bong.png"));
 				this.mapBtns.get(LOCATIONS[x][y]).setIcon(new ImageIcon(
-						"C:\\Users\\AD\\work\\java\\AI\\src\\chapter2\\agent_NM__Extend\\nguoi-lao-dong.jpg"));
+						".\\src\\chapter2\\agent_NM__Extend\\nguoi-lao-dong.jpg"));
 				this.envState.setAgentLocation(LOCATIONS[x][y], x, y);
 			}
 		} else {
@@ -129,8 +129,9 @@ public class Environment extends Thread {
 
 	public boolean canMove(String location, Action ac) {
 		if (ac == MOVE_UP || ac == MOVE_DOWN) {
-			for (int i = 0; i < LOCATIONS[0].length; i++) {
-				if (location.equals(LOCATIONS[ac == MOVE_UP ? LOCATIONS.length - 1 : 0][i]))
+			int len = ac == MOVE_UP ? LOCATIONS.length - 1 : 0;
+			for (int i = 0; i < LOCATIONS[len].length; i++) {
+				if (location.equals(LOCATIONS[len][i]))
 					return false;
 			}
 		} else if (ac == MOVE_RIGHT || ac == MOVE_LEFT) {

@@ -9,7 +9,7 @@ public class Environment {
 	public static final Action MOVE_UP = new DynamicAction("UP");
 	public static final Action MOVE_DOWN = new DynamicAction("DOWN");
 	public static final Action SUCK_DIRT = new DynamicAction("SUCK");
-	public static final String[][] LOCATIONS = { { "A", "B", "C", "D" }, { "E", "F", "G", "H" },
+	public static final String[][] LOCATIONS = { { "A", "C", "D" }, { "E", "F", "G", "H" },
 			{ "I", "J", "K", "L" } };
 
 	public static int score = 0;
@@ -108,8 +108,9 @@ public class Environment {
 
 	public boolean canMove(String location, Action ac) {
 		if (ac == MOVE_UP || ac == MOVE_DOWN) {
-			for (int i = 0; i < LOCATIONS[0].length; i++) {
-				if (location.equals(LOCATIONS[ac == MOVE_UP ? LOCATIONS.length - 1 : 0][i]))
+			int len = ac == MOVE_UP ? LOCATIONS.length - 1 : 0;
+			for (int i = 0; i < LOCATIONS[len].length; i++) {
+				if (location.equals(LOCATIONS[len][i]))
 					return false;
 			}
 		} else if (ac == MOVE_RIGHT || ac == MOVE_LEFT) {
