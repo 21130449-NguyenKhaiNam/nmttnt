@@ -1,4 +1,4 @@
-package chapter2.agent_ABCD; 
+package chapter2.agent_AB; 
 
 public class TestSimpleReflexAgent {
 	public static void main(String[] args) {
@@ -6,6 +6,6 @@ public class TestSimpleReflexAgent {
 		Agent agent = new Agent(new AgentProgram());
 		env.addAgent(agent, Environment.LOCATION_A);
 
-		env.step(3);
+		env.step(10);
 	}
 }
