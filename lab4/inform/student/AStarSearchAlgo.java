@@ -1,7 +1,5 @@
 package lab4.inform.student;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -94,11 +92,13 @@ public class AStarSearchAlgo implements IInformedSearchAlgo {
 			hS += node.getG();
 			node = tmp;
 		}
-		if(root.getH() > hS) {
+		if (root.getH() > hS) {
 			return false;
 		}
 		for (Node node2 : root.getChildrenNodes()) {
-			isAdmissibleH(node2, goal);
+			if(!isAdmissibleH(node2, goal)) {
+				return false;
+			}
 		}
 		return true;
 	}
